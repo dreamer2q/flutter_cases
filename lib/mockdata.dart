@@ -1,8 +1,24 @@
 var mockdata = [
-  PersonalSeri("assets/1.jpg", "MikuOki", "这里是一个简介"),
-  PersonalSeri("assets/2.jpg", "Ahlo", "简单的介绍"),
-  PersonalSeri("assets/3.jpg", "Mki", "我是奇怪的？"),
-  PersonalSeri("assets/1.jpg", "Oki", "怎么能这样说呢？"),
+  PersonalSeri(
+    "https://cdn-ali-img-staticbz.shanhutech.cn/a/201906/18/5d08d5b77d88e.jpg",
+    "Halo",
+    "",
+  ),
+  PersonalSeri(
+    "https://cdn-ali-img-staticbz.shanhutech.cn/a/201906/24/5d10b19bbdafe.jpg",
+    "Hola",
+    "",
+  ),
+  PersonalSeri(
+    "https://cdn-ali-img-staticbz.shanhutech.cn/a/201906/24/5d10b8c21cf98.jpg",
+    "Halio",
+    "",
+  ),
+  PersonalSeri(
+    "https://cdn-ali-img-staticbz.shanhutech.cn/a/201906/25/5d1201167ab03.jpg",
+    "Hiloa",
+    "",
+  ),
 ];
 
 class PersonalSeri {
@@ -11,4 +27,8 @@ class PersonalSeri {
   final String description;
 
   PersonalSeri(this.picture, this.name, this.description);
+
+  factory PersonalSeri.fromJson(map) {
+    return PersonalSeri(map[0], map[1], map[2]);
+  }
 }
