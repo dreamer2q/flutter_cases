@@ -1,0 +1,42 @@
+name: build-deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: deploy-qiniu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+
+      - run: flutter pub get
+
+      - run: flutter build web --release
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: build/app/outputs/apk/release/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        uses: saltbo/uptoc@master
+        with:
+          driver: qiniu
+          region: cn-east-2
+          endpoint: s3-cn-east-2.qiniucs.com
+          bucket: face-savior
+          dist: build/web
+        env:
+          UPTOC_UPLOADER_AK: ${{ secrets.QN_KEY }}
+          UPTOC_UPLOADER_SK: ${{ secrets.QN_SECRET }}
