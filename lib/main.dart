@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:face_savior/mockdata.dart';
+import 'package:face_savior/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Face Savior',
       theme: ThemeData(primarySwatch: Colors.brown),
       debugShowCheckedModeBanner: false,
-      home: LayoutWidget(
+      home: const LayoutWidget(
         child: DataLoader(),
       ),
     );
@@ -53,8 +53,12 @@ class DataLoader extends StatelessWidget {
   const DataLoader({Key? key}) : super(key: key);
 
   Future<List<PersonalSeri>> fetcher() async {
-    final body =
-        await http.read(Uri.parse("https://image.dreamer2q.wang/_/faces.json"));
+    const uri = "https://www.hduin.club/redhomer/2021.json";
+    final res = await http.get(Uri.parse(uri));
+    if (res.statusCode != 200) {
+      throw res.reasonPhrase!;
+    }
+    final body = const Utf8Decoder().convert(res.bodyBytes);
     final data = json.decode(body);
     return (data as List).map((e) => PersonalSeri.fromJson(e)).toList();
   }
@@ -75,8 +79,79 @@ class DataLoader extends StatelessWidget {
         if (!snapshot.hasData) {
           return const CupertinoActivityIndicator();
         }
-        return FaceSaviorPage(data: snapshot.data!);
+        //return FaceSaviorPage(data: snapshot.data!);
+        return HomePage(data: snapshot.data!);
       },
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final List<PersonalSeri> data;
+
+  void startChallenge(context, [int count = 4]) {
+    final n = <PersonalSeri>{};
+    while (n.length != count) {
+      final i = Random(null).nextInt(data.length);
+      n.add(data[i]);
+    }
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => FaceSaviorPage(data: n.toList()),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Face Savior'),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        width: double.infinity,
+        child: Column(
+          children: [
+            Image.asset('assets/faces.png'),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: const Text(
+                '  准备好了吗？',
+                style: TextStyle(
+                  fontSize: 32,
+                ),
+              ),
+            ),
+            Text('Data Loaded: ${data.length}'),
+            Container(
+              padding: const EdgeInsets.only(top: 24),
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => startChallenge(context),
+                    child: const Text("小试身手 4个"),
+                  ),
+                  if (data.length > 10)
+                    ElevatedButton(
+                      onPressed: () => startChallenge(context, 10),
+                      child: const Text("十发入魂 10个"),
+                    ),
+                  ElevatedButton(
+                    onPressed: () => startChallenge(context, data.length),
+                    child: Text("一起来吧 ${data.length}个"),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -122,7 +197,9 @@ class _FaceSaviorPageState extends State<FaceSaviorPage> {
   ];
 
   var index = 0;
+
   PersonalSeri get person => widget.data[index % widget.data.length];
+
   List<PersonalSeri> get data => widget.data;
 
   void checkAnswer(bool correct) {
@@ -132,9 +209,20 @@ class _FaceSaviorPageState extends State<FaceSaviorPage> {
         builder: (_) => const AlertDialog(
           title: Text('回答正确'),
         ),
-      ).then((_) => nextPerson());
+      ).then((_) {
+        if (index != data.length - 1) {
+          nextPerson();
+        } else {
+          showDialog(
+            context: context,
+            builder: (_) => const AlertDialog(
+              title: Text('Congratulations'),
+              content: Text('Challenge Over'),
+            ),
+          ).then((_) => Navigator.of(context).pop());
+        }
+      });
     } else {
-      final person = mockdata[index];
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
@@ -186,7 +274,7 @@ class _FaceSaviorPageState extends State<FaceSaviorPage> {
       appBar: AppBar(
         title: const Text('Face Savior'),
       ),
-      body: Column(
+      body: ListView(
         children: [
           QuestionWidget(person: person),
           Column(
@@ -205,29 +293,68 @@ class QuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final netImage = person.picture.startsWith("http");
+    final imageWidget = Center(
+      child: Image.network(
+        person.picture,
+        loadingBuilder: (_, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                  : null,
+            ),
+          );
+        },
+        errorBuilder: (_, err, stack) {
+          return Text('Load Error: $err');
+        },
+      ),
+    );
 
     return Container(
       padding: const EdgeInsets.all(8),
       child: Stack(
         children: [
-          netImage
-              ? Image.network(person.picture)
-              : Image.asset(person.picture),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-              ),
-              child: Text(
-                person.description,
-                style: const TextStyle(
-                  color: Colors.white,
+          Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.width,
+            ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) {
+                    return GestureDetector(
+                      onTap: () => Navigator.of(_).pop(),
+                      child: imageWidget,
+                    );
+                  }),
+                );
+              },
+              child: imageWidget,
+            ),
+          ),
+          if (person.description.trim() != '')
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+                child: Text(
+                  person.description,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );
