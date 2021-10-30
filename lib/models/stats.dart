@@ -19,7 +19,7 @@ class AnswerState {
   final String? answer;
   final Duration? duration;
 
-  bool get isWrong => answer == person?.name;
+  bool get isWrong => answer != person?.name;
   bool get isTimeout => answer == null;
 
   AnswerState({
