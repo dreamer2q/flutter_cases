@@ -1,10 +1,10 @@
-import 'dart:convert';
 import 'dart:math';
 
-import 'package:face_savior/data.dart';
+import 'package:face_savior/models/person.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'widgets/dataloader.dart';
+import 'widgets/layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,143 +26,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LayoutWidget extends StatelessWidget {
-  const LayoutWidget({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: const BoxConstraints(
-            maxWidth: 420,
-          ),
-          child: child,
-        ),
-      ),
-    );
-  }
-}
-
-class DataLoader extends StatelessWidget {
-  const DataLoader({Key? key}) : super(key: key);
-
-  Future<List<PersonalSeri>> fetcher() async {
-    const uri = "https://www.hduin.club/redhomer/2021.json";
-    final res = await http.get(Uri.parse(uri));
-    if (res.statusCode != 200) {
-      throw res.reasonPhrase!;
-    }
-    final body = const Utf8Decoder().convert(res.bodyBytes);
-    final data = json.decode(body);
-    return (data as List).map((e) => PersonalSeri.fromJson(e)).toList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<PersonalSeri>>(
-      future: fetcher(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Text(
-            '${snapshot.error}',
-            style: const TextStyle(
-              color: Colors.red,
-            ),
-          );
-        }
-        if (!snapshot.hasData) {
-          return const CupertinoActivityIndicator();
-        }
-        //return FaceSaviorPage(data: snapshot.data!);
-        return HomePage(data: snapshot.data!);
-      },
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  final List<PersonalSeri> data;
-
-  void startChallenge(context, [int count = 4]) {
-    final n = <PersonalSeri>{};
-    while (n.length != count) {
-      final i = Random(null).nextInt(data.length);
-      n.add(data[i]);
-    }
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => FaceSaviorPage(data: n.toList()),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Face Savior'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        width: double.infinity,
-        child: Column(
-          children: [
-            Image.asset('assets/faces.png'),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: const Text(
-                '  准备好了吗？',
-                style: TextStyle(
-                  fontSize: 32,
-                ),
-              ),
-            ),
-            Text('Data Loaded: ${data.length}'),
-            Container(
-              padding: const EdgeInsets.only(top: 24),
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () => startChallenge(context),
-                    child: const Text("小试身手 4个"),
-                  ),
-                  if (data.length > 10)
-                    ElevatedButton(
-                      onPressed: () => startChallenge(context, 10),
-                      child: const Text("十发入魂 10个"),
-                    ),
-                  ElevatedButton(
-                    onPressed: () => startChallenge(context, data.length),
-                    child: Text("一起来吧 ${data.length}个"),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class FaceSaviorPage extends StatefulWidget {
   const FaceSaviorPage({
     Key? key,
     required this.data,
   }) : super(key: key);
 
-  final List<PersonalSeri> data;
+  final List<PersonSeri> data;
 
   @override
   State<FaceSaviorPage> createState() => _FaceSaviorPageState();
@@ -198,9 +68,9 @@ class _FaceSaviorPageState extends State<FaceSaviorPage> {
 
   var index = 0;
 
-  PersonalSeri get person => widget.data[index % widget.data.length];
+  PersonSeri get person => widget.data[index % widget.data.length];
 
-  List<PersonalSeri> get data => widget.data;
+  List<PersonSeri> get data => widget.data;
 
   void checkAnswer(bool correct) {
     if (correct) {
@@ -289,13 +159,13 @@ class _FaceSaviorPageState extends State<FaceSaviorPage> {
 class QuestionWidget extends StatelessWidget {
   const QuestionWidget({Key? key, required this.person}) : super(key: key);
 
-  final PersonalSeri person;
+  final PersonSeri person;
 
   @override
   Widget build(BuildContext context) {
     final imageWidget = Center(
       child: Image.network(
-        person.picture,
+        person.img,
         loadingBuilder: (_, child, loadingProgress) {
           if (loadingProgress == null) {
             return child;
@@ -337,7 +207,7 @@ class QuestionWidget extends StatelessWidget {
               child: imageWidget,
             ),
           ),
-          if (person.description.trim() != '')
+          if (person.desc.trim() != '')
             Positioned(
               bottom: 0,
               left: 0,
@@ -348,7 +218,7 @@ class QuestionWidget extends StatelessWidget {
                   color: Colors.black.withOpacity(0.5),
                 ),
                 child: Text(
-                  person.description,
+                  person.desc,
                   style: const TextStyle(
                     color: Colors.white,
                   ),
