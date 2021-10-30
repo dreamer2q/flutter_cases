@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:face_savior/main.dart';
 import 'package:face_savior/models/person.dart';
 import 'package:flutter/material.dart';
 
 import 'datalist_page.dart';
+import 'face_challenge_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => FaceSaviorPage(data: n.toList()),
+        builder: (_) => ChallengePage(data: n.toList()),
       ),
     );
   }
