@@ -19,7 +19,6 @@ class HeartBeatPage extends StatelessWidget {
             alignment: Alignment.center,
             child: const HeartBeats(),
           ),
-          // const Text('Print("Dreamer2q ❤️ Anna");'),
         ],
       ),
     );
