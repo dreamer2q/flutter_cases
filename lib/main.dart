@@ -1,7 +1,6 @@
+import 'package:face_savior/routes/entry_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'widgets/dataloader.dart';
-import 'widgets/layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,11 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Face Savior',
-      theme: ThemeData(primarySwatch: Colors.brown),
+      theme: ThemeData(primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
-      home: const LayoutWidget(
-        child: DataLoader(),
-      ),
+      home: const EntryPage(),
     );
   }
 }
