@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:face_savior/models/person.dart';
+import 'package:face_savior/routes/inherited/inherited_counter.dart';
 import 'package:flutter/material.dart';
 
-import 'datalist_page.dart';
 import 'face_challenge_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
           IconButton(
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => DataListPage(data: data),
+                builder: (_) => const InheritedCounterPage(),
               ),
             ),
             icon: const Icon(Icons.list),
