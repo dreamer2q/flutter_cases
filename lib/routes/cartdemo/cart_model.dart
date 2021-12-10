@@ -12,8 +12,7 @@ class CartItem {
 class CartModel extends ChangeNotifier {
   final List<CartItem> goods = [];
 
-  double get totalprice =>
-      goods.map((item) => item.price).reduce((p1, p2) => p1 + p2);
+  double get totalprice => goods.fold(0, (p, item) => item.price + p);
 
   void additem(final CartItem item) {
     goods.add(item);
