@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:face_savior/models/person.dart';
-import 'package:face_savior/routes/home_page.dart';
+import 'package:flutter_cases/models/person.dart';
+import 'package:flutter_cases/routes/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

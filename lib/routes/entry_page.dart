@@ -1,6 +1,6 @@
-import 'package:face_savior/routes/cartdemo/card_page.dart';
-import 'package:face_savior/routes/heartdemo/heart_page.dart';
-import 'package:face_savior/widgets/dataloader.dart';
+import 'package:flutter_cases/routes/cartdemo/card_page.dart';
+import 'package:flutter_cases/routes/heartdemo/heart_page.dart';
+import 'package:flutter_cases/widgets/dataloader.dart';
 import 'package:flutter/material.dart';
 
 class EntryPageItem {

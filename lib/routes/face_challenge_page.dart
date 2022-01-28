@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:face_savior/models/person.dart';
-import 'package:face_savior/models/stats.dart';
-import 'package:face_savior/routes/result_page.dart';
-import 'package:face_savior/widgets/answer_button.dart';
-import 'package:face_savior/widgets/person.dart';
+import 'package:flutter_cases/models/person.dart';
+import 'package:flutter_cases/models/stats.dart';
+import 'package:flutter_cases/routes/result_page.dart';
+import 'package:flutter_cases/widgets/answer_button.dart';
+import 'package:flutter_cases/widgets/person.dart';
 import 'package:flutter/material.dart';
 
 // 答案随机排序, 共 24 种可能

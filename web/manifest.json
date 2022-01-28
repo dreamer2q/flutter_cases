@@ -1,11 +1,11 @@
 {
-    "name": "face_savior",
-    "short_name": "face_savior",
+    "name": "flutter_cases",
+    "short_name": "flutter_cases",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project for face_savior",
+    "description": "A new Flutter project for flutter_cases",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

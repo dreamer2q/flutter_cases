@@ -1,6 +1,6 @@
-# face_savior
+# flutter_cases
 
-A new Flutter project for face_savior
+A new Flutter project for flutter_cases
 
 ## Getting Started
 

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:face_savior/models/stats.dart';
+import 'package:flutter_cases/models/stats.dart';
 import 'package:flutter/material.dart';
 
 const _choice = ['A', 'B', 'C', 'D'];

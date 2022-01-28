@@ -1,4 +1,4 @@
-import 'package:face_savior/routes/cartdemo/cart_model.dart';
+import 'package:flutter_cases/routes/cartdemo/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

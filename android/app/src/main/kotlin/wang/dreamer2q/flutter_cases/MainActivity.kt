@@ -1,4 +1,4 @@
-package wang.dreamer2q.face_savior.face_savior
+package wang.dreamer2q.flutter_cases
 
 import io.flutter.embedding.android.FlutterActivity
 

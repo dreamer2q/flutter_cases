@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:face_savior/models/person.dart';
-import 'package:face_savior/routes/inherited/inherited_counter.dart';
+import 'package:flutter_cases/models/person.dart';
+import 'package:flutter_cases/routes/inherited/inherited_counter.dart';
 import 'package:flutter/material.dart';
 
 import 'face_challenge_page.dart';

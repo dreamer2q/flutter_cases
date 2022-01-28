@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "wang.dreamer2q.face_savior" "\0"
-            VALUE "FileDescription", "A new Flutter project for face_savior" "\0"
+            VALUE "CompanyName", "wang.dreamer2q.flutter_cases" "\0"
+            VALUE "FileDescription", "A new Flutter project for flutter_cases" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "face_savior" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 wang.dreamer2q.face_savior. All rights reserved." "\0"
-            VALUE "OriginalFilename", "face_savior.exe" "\0"
-            VALUE "ProductName", "face_savior" "\0"
+            VALUE "InternalName", "flutter_cases" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2021 wang.dreamer2q.flutter_cases. All rights reserved." "\0"
+            VALUE "OriginalFilename", "flutter_cases.exe" "\0"
+            VALUE "ProductName", "flutter_cases" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(face_savior LANGUAGES CXX)
+project(flutter_cases LANGUAGES CXX)
 
-set(BINARY_NAME "face_savior")
+set(BINARY_NAME "flutter_cases")
 
 cmake_policy(SET CMP0063 NEW)
 

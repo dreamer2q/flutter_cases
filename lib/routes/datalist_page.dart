@@ -1,4 +1,4 @@
-import 'package:face_savior/models/person.dart';
+import 'package:flutter_cases/models/person.dart';
 import 'package:flutter/material.dart';
 
 class DataListPage extends StatelessWidget {
