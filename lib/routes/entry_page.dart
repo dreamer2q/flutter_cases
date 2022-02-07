@@ -1,7 +1,11 @@
+import 'package:flutter_cases/cases/transitions/page_view_transition.dart';
+import 'package:flutter_cases/demos/animated_slide_in.dart';
 import 'package:flutter_cases/routes/cartdemo/card_page.dart';
 import 'package:flutter_cases/routes/heartdemo/heart_page.dart';
 import 'package:flutter_cases/widgets/dataloader.dart';
 import 'package:flutter/material.dart';
+
+import 'overflow/text_overflow_page.dart';
 
 class EntryPageItem {
   final String name;
@@ -31,6 +35,21 @@ final _entryPages = [
     description: "Its a heart",
     builder: (_) => const HeartBeatPage(),
   ),
+  EntryPageItem(
+    name: "Text Overflow",
+    description: "",
+    builder: (_) => const TextOverflowPage(),
+  ),
+  EntryPageItem(
+    name: "PageView Transition",
+    description: "Custom",
+    builder: (_) => const PageViewTransitionPage(),
+  ),
+  EntryPageItem(
+    name: "Animated SlideIn",
+    description: "animted slide in ribbons",
+    builder: (_) => const AnimatedSlideInPage(),
+  ),
 ];
 
 class EntryPage extends StatelessWidget {
@@ -54,7 +73,7 @@ class EntryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Flutter Learn"),
+        title: const Text("Flutter Cases Learn"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
