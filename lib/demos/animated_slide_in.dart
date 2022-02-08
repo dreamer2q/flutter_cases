@@ -9,39 +9,41 @@ class AnimatedSlideInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const duration = Duration(seconds: 1);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Animated Slide In'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        // alignment: Alignment.center,
-        children: [
-          Stack(
-            children: [
-              Transform.rotate(
-                angle: (math.pi / 180) * 20,
-                child: SlideInRibbon(
-                  duration: duration,
-                  child: Container(
-                    color: Colors.red,
+    return ClipRect(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Animated Slide In'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // alignment: Alignment.center,
+          children: [
+            Stack(
+              children: [
+                Transform.rotate(
+                  angle: (math.pi / 180) * 20,
+                  child: SlideInRibbon(
+                    duration: duration,
+                    child: Container(
+                      color: Colors.red,
+                    ),
                   ),
                 ),
-              ),
-              Transform.rotate(
-                angle: (math.pi / 180) * -20,
-                child: SlideInRibbon(
-                  reverse: true,
-                  duration: duration,
-                  delay: duration,
-                  child: Container(
-                    color: Colors.blue,
+                Transform.rotate(
+                  angle: (math.pi / 180) * -20,
+                  child: SlideInRibbon(
+                    reverse: true,
+                    duration: duration,
+                    delay: duration,
+                    child: Container(
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
