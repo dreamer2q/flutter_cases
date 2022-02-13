@@ -1,3 +1,4 @@
+import 'package:flutter_cases/cases/animations/trans_page.dart';
 import 'package:flutter_cases/cases/transitions/page_view_transition.dart';
 import 'package:flutter_cases/demos/animated_slide_in.dart';
 import 'package:flutter_cases/routes/cartdemo/card_page.dart';
@@ -49,6 +50,11 @@ final _entryPages = [
     name: "Animated SlideIn",
     description: "animted slide in ribbons",
     builder: (_) => const AnimatedSlideInPage(),
+  ),
+  EntryPageItem(
+    name: "Animated Container",
+    description: "animated container between pages",
+    builder: (_) => const ScenarioExamplePage(),
   ),
 ];
 
