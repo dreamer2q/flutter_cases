@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -213,7 +212,6 @@ class ScenarioPicker extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           debugPrint("picker constraints: $constraints");
-          final isFlying = constraints.hasBoundedHeight;
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(

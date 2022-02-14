@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class AccuratedSizedBox extends SingleChildRenderObjectWidget {
-  AccuratedSizedBox({
+  const AccuratedSizedBox({
     Key? key,
     required Widget child,
     this.height = 0,
