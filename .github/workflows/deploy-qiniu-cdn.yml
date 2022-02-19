@@ -1,4 +1,5 @@
 name: deploy-Qiniu-CDN
+
 on:
   push:
     paths:
@@ -10,8 +11,9 @@ on:
 
 jobs:
   deploy:
-    name: deploy-qiniu
     runs-on: ubuntu-latest
+
+    name: deploy-qiniu
     steps:
       - uses: actions/checkout@v2
 

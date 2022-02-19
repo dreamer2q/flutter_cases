@@ -6,6 +6,7 @@ on:
       - "lib/**"
       - "pubspec.yaml"
       - "pubspec.lock"
+      - ".github/workflows/deploy-firebase.yml"
     branches:
       - master
 
