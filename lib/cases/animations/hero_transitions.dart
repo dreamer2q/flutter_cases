@@ -274,20 +274,6 @@ class ScenarioPicker2 extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            // body: TextField(
-            //   decoration: InputDecoration(
-            //     hintText: 'Create for Izuku Midoriya',
-            //     enabledBorder: InputBorder.none,
-            //     focusedBorder: InputBorder.none,
-            //   ),
-            //   maxLength: 300,
-            //   maxLines: 10,
-            //   style: TextStyle(
-            //     color: Color(0x2D2D2D66),
-            //     fontSize: 16,
-            //     height: 24 / 16,
-            //   ),
-            // ),
             body: SizedBox(
               height: 150,
               child: Text(

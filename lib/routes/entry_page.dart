@@ -1,4 +1,7 @@
-import 'package:flutter_cases/cases/animations/trans_page.dart';
+import 'package:flutter_cases/cases/animations/animated_parabola.dart';
+import 'package:flutter_cases/cases/animations/hero_transitions.dart';
+import 'package:flutter_cases/cases/chatroom/chat_room_page.dart';
+import 'package:flutter_cases/cases/text_layout/layout_text.dart';
 import 'package:flutter_cases/cases/transitions/page_view_transition.dart';
 import 'package:flutter_cases/demos/animated_slide_in.dart';
 import 'package:flutter_cases/routes/cartdemo/card_page.dart';
@@ -55,6 +58,21 @@ final _entryPages = [
     name: "Animated Container",
     description: "animated container between pages",
     builder: (_) => const ScenarioExamplePage(),
+  ),
+  EntryPageItem(
+    name: "Chat Room",
+    description: "using firebase as a backend",
+    builder: (_) => const ChatRoomPage(),
+  ),
+  EntryPageItem(
+    name: "Layout Text",
+    description: "calculate text size",
+    builder: (_) => const LayoutTextPage(),
+  ),
+  EntryPageItem(
+    name: "Parabola Curves",
+    description: "Animated Parabola Curve",
+    builder: (_) => const AnimatedParabolaPage(),
   ),
 ];
 

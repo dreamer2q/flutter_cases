@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_cases/config/firebase_options.dart';
 import 'package:flutter_cases/routes/entry_page.dart';
 import 'package:flutter/material.dart';
+
+BuildContext? globalContext;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Cases',
       theme: ThemeData(primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        globalContext ??= context;
+        return child!;
+      },
       home: const EntryPage(),
     );
   }
