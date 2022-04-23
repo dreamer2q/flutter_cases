@@ -4,14 +4,16 @@ import 'package:flutter_cases/constants/text_styles.dart';
 // ref:
 // https://medium.com/flutter-community/a-deep-dive-into-pageview-in-flutter-with-custom-transitions-581d9ea6dded
 
-class PageViewTransitionPage extends StatefulWidget {
-  const PageViewTransitionPage({Key? key}) : super(key: key);
+class CustomPageViewTransitionPage extends StatefulWidget {
+  const CustomPageViewTransitionPage({Key? key}) : super(key: key);
 
   @override
-  State<PageViewTransitionPage> createState() => _PageViewTransitionPageState();
+  State<CustomPageViewTransitionPage> createState() =>
+      _CustomPageViewTransitionPageState();
 }
 
-class _PageViewTransitionPageState extends State<PageViewTransitionPage> {
+class _CustomPageViewTransitionPageState
+    extends State<CustomPageViewTransitionPage> {
   late final PageController _pageController;
   double pageOffset = 0.0;
 

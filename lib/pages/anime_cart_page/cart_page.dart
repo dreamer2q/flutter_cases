@@ -1,7 +1,7 @@
-import 'package:flutter_cases/routes/cartdemo/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'cart_model.dart';
 import 'widgets/add_button.dart';
 
 const _allGoods = [

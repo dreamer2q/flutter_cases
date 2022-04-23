@@ -1,4 +1,3 @@
-// 商品模型
 import 'package:flutter/material.dart';
 
 class CartItem {

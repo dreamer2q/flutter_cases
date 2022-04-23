@@ -1,45 +1,18 @@
 import 'package:flutter/material.dart';
 
 class InheritedCounterPage extends StatelessWidget {
-  const InheritedCounterPage({Key? key}) : super(key: key);
+  const InheritedCounterPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final theme = Theme.of(context);
-    return WillPopScope(
-      onWillPop: () async {
-        final result = await showDialog<bool>(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('退出'),
-              content: const Text('你确定要退出吗?'),
-              actions: [
-                TextButton(
-                  child: const Text('确认'),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                ),
-                TextButton(
-                  child: const Text('取消'),
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                ),
-              ],
-            );
-          },
-        );
-        return result!;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Inherited Counter'),
-        ),
-        body: const Center(
-          child: _CounterWidget(),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Inherited Counter'),
+      ),
+      body: const Center(
+        child: _CounterWidget(),
       ),
     );
   }
@@ -63,7 +36,7 @@ class _CounterWidgetState extends State<_CounterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ShareInheritedWidget(
+    return _MyInheritedWidget(
       data: count,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -82,21 +55,21 @@ class _CounterWidgetState extends State<_CounterWidget> {
   }
 }
 
-class ShareInheritedWidget extends InheritedWidget {
+class _MyInheritedWidget extends InheritedWidget {
   final int data;
 
-  const ShareInheritedWidget({
+  const _MyInheritedWidget({
     Key? key,
     required Widget child,
     required this.data,
   }) : super(key: key, child: child);
 
-  static ShareInheritedWidget? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<ShareInheritedWidget>();
+  static _MyInheritedWidget? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<_MyInheritedWidget>();
   }
 
   @override
-  bool updateShouldNotify(ShareInheritedWidget oldWidget) {
+  bool updateShouldNotify(_MyInheritedWidget oldWidget) {
     return oldWidget.data != data;
   }
 }
@@ -111,7 +84,7 @@ class _CounterDisplayWidget extends StatefulWidget {
 class __CounterDisplayWidgetState extends State<_CounterDisplayWidget> {
   @override
   Widget build(BuildContext context) {
-    final share = ShareInheritedWidget.of(context);
+    final share = _MyInheritedWidget.of(context);
     return Text('${share!.data}');
   }
 
