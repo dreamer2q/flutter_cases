@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cases/pages/swipe_route_page/swipe_route.dart';
+import 'package:flutter_cases/pages/transitions/swipe_route_page/swipe_route.dart';
 
 class SwipeRoutePage extends StatefulWidget {
   const SwipeRoutePage({

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cases/pages/heroes/scenario_example_page.dart';
 import 'package:flutter_cases/pages/animes/heart_page.dart';
 import 'package:flutter_cases/pages/case_entry_page.dart';
-import 'package:flutter_cases/pages/swipe_route_page/swipe_route_page.dart';
+import 'package:flutter_cases/pages/transitions/swipe_route_page/swipe_route_page.dart';
 
 import 'bezier_curves/cart_page.dart';
 import 'transitions/custom_page_view_page.dart';
@@ -37,27 +37,27 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
     CaseEntryItem(
       title: 'Beating Heart',
-      desc: 'Animated Heart Beating',
+      desc: '心跳动画',
       builder: (_) => const HeartBeatPage(),
     ),
     CaseEntryItem(
       title: 'Counter (InheritedWidget)',
-      desc: 'Share data across Widgets',
+      desc: '基于 InheritedWidget 的计数器',
       builder: (_) => const InheritedCounterPage(),
     ),
     CaseEntryItem(
       title: "PageView Transition",
-      desc: "Customize your PageView transition",
+      desc: "自定义 PageView 转场动画",
       builder: (_) => const CustomPageViewTransitionPage(),
     ),
     CaseEntryItem(
-      title: "SwipeRoutePage",
-      desc: "Swipe left to open a new page",
+      title: "Right Swipe Open",
+      desc: "从右向左滑打开新页面",
       builder: (_) => const SwipeRoutePage(),
     ),
     CaseEntryItem(
-      title: "SwipeRoutePage",
-      desc: "Swipe left to open a new page",
+      title: "Hero Trans Page",
+      desc: "Hero 转场动画",
       builder: (_) => const ScenarioExamplePage(),
     ),
   ];
