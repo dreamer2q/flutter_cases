@@ -45,7 +45,6 @@ class _SwipePageContainerState extends State<SwipePageContainer>
 
   @override
   Widget build(BuildContext context) {
-    Navigator;
     return Stack(
       fit: StackFit.passthrough,
       children: [
@@ -53,7 +52,23 @@ class _SwipePageContainerState extends State<SwipePageContainer>
         ValueListenableBuilder<double>(
           valueListenable: _controller.view,
           builder: (context, value, child) {
-            return value > 0 ? child! : SizedBox();
+            return value > 0
+                ? Stack(
+                    children: [
+                      child!,
+                      PositionedDirectional(
+                        top: 0,
+                        bottom: 0,
+                        width: 20,
+                        start: 0,
+                        child: Listener(
+                          onPointerDown: _handlePointerDown,
+                          behavior: HitTestBehavior.translucent,
+                        ),
+                      ),
+                    ],
+                  )
+                : SizedBox();
           },
           child: CupertinoPageTransition(
             primaryRouteAnimation: _controller,
