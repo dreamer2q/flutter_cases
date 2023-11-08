@@ -1,21 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cases/pages/anime_heartbeat_page/heart_page.dart';
+import 'package:flutter_cases/pages/heroes/scenario_example_page.dart';
+import 'package:flutter_cases/pages/animes/heart_page.dart';
 import 'package:flutter_cases/pages/case_entry_page.dart';
+import 'package:flutter_cases/pages/swipe_route_page/swipe_route_page.dart';
 
-import 'anime_cart_page/cart_page.dart';
-import 'custom_transition_page/custom_page_view_page.dart';
-import 'inherited_counter_page/inherited_counter.dart';
+import 'bezier_curves/cart_page.dart';
+import 'transitions/custom_page_view_page.dart';
+import 'state_manage/inherited_counter.dart';
 
 class CaseEntryItem {
   final String title;
-  final String descript;
+  final String desc;
   final WidgetBuilder builder;
 
   CaseEntryItem({
     required this.title,
     required this.builder,
-    this.descript = '',
+    this.desc = '',
   });
 }
 
@@ -30,23 +32,33 @@ class _MyHomePageState extends State<MyHomePage> {
   final _caseList = [
     CaseEntryItem(
       title: 'Cart BezierCurve',
-      descript: '添加商品的贝塞尔曲线动画',
+      desc: '添加商品的贝塞尔曲线动画',
       builder: (_) => const CartPage(),
     ),
     CaseEntryItem(
-      title: 'Anime Heart Beat',
-      descript: 'Animated Heart Beating',
+      title: 'Beating Heart',
+      desc: 'Animated Heart Beating',
       builder: (_) => const HeartBeatPage(),
     ),
     CaseEntryItem(
-      title: 'Counter using InheritedWidget',
-      descript: 'Share data across Widgets',
+      title: 'Counter (InheritedWidget)',
+      desc: 'Share data across Widgets',
       builder: (_) => const InheritedCounterPage(),
     ),
     CaseEntryItem(
       title: "PageView Transition",
-      descript: "Customize your PageView transition",
+      desc: "Customize your PageView transition",
       builder: (_) => const CustomPageViewTransitionPage(),
+    ),
+    CaseEntryItem(
+      title: "SwipeRoutePage",
+      desc: "Swipe left to open a new page",
+      builder: (_) => const SwipeRoutePage(),
+    ),
+    CaseEntryItem(
+      title: "SwipeRoutePage",
+      desc: "Swipe left to open a new page",
+      builder: (_) => const ScenarioExamplePage(),
     ),
   ];
 
@@ -54,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final c = _caseList[index];
     return ListTile(
       title: Text(c.title),
-      subtitle: c.descript.isNotEmpty ? Text(c.descript) : null,
+      subtitle: c.desc.isNotEmpty ? Text(c.desc) : null,
       onTap: () {
         Navigator.of(context).push(
           CupertinoPageRoute(
